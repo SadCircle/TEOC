@@ -3,19 +3,24 @@
 
 
 
+
 ## Installation
 
 ElectroLib requires [Docker](https://www.docker.com/) to run.
+
+Склонируйте репозиторий 
+```sh
+git clone https://github.com/SadCircle/TEOC.git
+```
+
 
 В терминале перейдите в каталог TEOC и выполните команду:
 ```sh
 docker-compose up --build -d
 ```
 
- 
-Докер создаст все необходимые образы и запустит их.
 
-Для создания пользователя выполните в терминале контейнера web команду:
+Для создания пользователя выполните в терминале:
 ```sh
 docker-compose exec web python manage.py createsuperuser
 ```
