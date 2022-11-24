@@ -1,0 +1,24 @@
+{% extends 'base.html' %} {% load static %}
+
+
+{% block header %} {% endblock %} 
+{% block autohide_nav %}{% endblock %}
+
+
+{% block content %}
+
+<div class="container"  style="height: 100%">
+<div class="d-flex justify-content-center align-items-end" style="padding-top:15%">
+    <div class="p-2" ><img class="mb-4" src="{% static 'imgs/android-chrome-512x512.png' %}" alt="" width="75" height="75"></div>
+</div>
+<form class="d-flex justify-content-center" style="height: 50%"  action="{% url 'catalog' %}" method="get">
+    <div class="p-2" style="width:50% "><input name="q" class="form-control me-2" type="search" placeholder="Поиск по книгам" aria-label="Search"></div>
+    <div class="p-2"><button class="btn btn-outline-primary" type="submit"><span class="icon-book"></span></button></div>
+    
+</form>
+</div>
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

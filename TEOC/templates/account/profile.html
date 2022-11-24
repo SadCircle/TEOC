@@ -1,0 +1,68 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="container">
+    <article class="my-3" id="validation">
+        <div class="bd-heading sticky-xl-top align-self-start mt-5 mb-3 mt-xl-0 mb-xl-2">
+            <h3>Profile</h3>
+        </div>
+        <div>
+            <form class="row g-3" method="PUT" action="">
+                <div class="row g-2">
+                    <div class="col-md-4">
+                        <label for="validationServer01" class="form-label">First Name</label>
+                        <input type="text" class="form-control {% if request.user.first_name %}is-valid {% else %} is-invalid {% endif %}" id="validationServer01" value="" required=""> {% if request.user.first_name %}
+                        <div class="valid-feedback">
+                            first name is valid
+                        </div>
+                        {% else %}
+                        <div class="invalid-feedback">
+                            Please provide correct first name
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="validationServer02" class="form-label">Last Name</label>
+                        <input type="text" class="form-control {% if request.user.last_name %}is-valid {% else %} is-invalid {% endif %}" id="validationServer02" value="" required=""> {% if request.user.last_name %}
+                        <div class="valid-feedback">
+                            last name is valid
+                        </div>
+                        {% else %}
+                        <div class="invalid-feedback">
+                            Please provide correct last name
+                        </div>
+                        {% endif %}
+                    </div>
+
+                </div>
+                <div class="row g-2">
+                    <div class="col-md-4">
+                        <label for="validationServerUsername" class="form-label">Username</label>
+                        <div class="input-group has-validation">
+                            <span class="input-group-text" id="inputGroupPrepend3">@</span>
+                            <input type="text" class="form-control is-valid" id="validationServerUsername" aria-describedby="inputGroupPrepend3" value={{request.user.username}} required="">
+                            <div class="invalid-feedback">
+                                Please choose a username.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="validationServer03" class="form-label">City</label>
+                        <input type="text" class="form-control is-invalid" id="validationServer03">
+                        <div class="invalid-feedback">
+                            Please provide correct location
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <button class="btn btn-primary" type="submit">Submit form</button>
+                </div>
+            </form>
+        </div>
+    </article>
+
+
+
+</div>
+{% endblock %}

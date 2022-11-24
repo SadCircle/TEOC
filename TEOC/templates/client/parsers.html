@@ -1,0 +1,54 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+<div class="container col-md-8">
+    <button type="button" class="btn btn-outline-primary"><a href="{% url 'parser_manager' %}">Create parser</a></button>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">User</th>
+                <th scope="col">api_id</th>
+                <th scope="col">api_hash</th>
+                <th scope="col">phone</th>
+                <th scope="col">time_create</th>
+                <th scope="col">time_update</th>
+                <th scope="col">auth</th>
+                <th scope="col">in_progress</th>
+                <th scope="col">auto</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in object_list %}
+            <form class="" action="{% url 'parsers' %}" method="post">
+                {% csrf_token %}
+                <tr>
+                    <th scope="row">{{p.id}}</th>
+                    <div class="invisible"><input name="id" value="{{p.id}}"></div>
+                    <td>{{p.user.username}}</td>
+                    <td>{{p.api_id}}</td>
+                    <td>{{p.api_hash}}</td>
+                    <td>{{p.phone}}</td>
+                    <td>{{p.time_create}}</td>
+                    <td>{{p.time_update}}</td>
+                    <td>{{p.auth}}</td>
+                    {% if p.in_progress %}
+                    <td>{{p.in_progress}}</td>
+                    {% elif p.auth %}
+                    <td><button name="run" value="true" type="submit" class="btn btn-primary" onClick="window.location.reload();">Run</button></td>
+                    {% endif %} {% if p.auto %}
+                    <td>{{p.auto}}</td>
+                    {% else %}
+                    <td><button name="auto" value="true" type="submit" class="btn btn-primary" onClick="window.location.reload();">Auto</button></td>
+                    {% endif %}
+                    <td><button name="del" value="true" type="submit" class="btn btn-close" onClick="window.location.reload();"></button></td>
+
+                </tr>
+            </form>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock %}

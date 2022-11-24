@@ -1,0 +1,89 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+<!-- Input form telegram auth -->
+<div class="container">
+    <article class="my-3" id="overview">
+        <div class="bd-heading sticky-xl-top align-self-start mt-5 mb-3 mt-xl-0 mb-xl-2">
+            <h3>Настройка краулера</h3>
+
+        </div>
+
+        <div>
+            {% if request_code %}
+            <div class="alert alert-success" role="alert">
+                <h4 class="alert-heading">Успех!</h4>
+                <p>Данные паучка подтвердились.Вам отправлен код подтверждения в телеграм.</p>
+                <hr>
+                <p class="mb-0">Нажмите на кнопку и введите код подтверждения</p>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#RequestCodeModal">Ввести код</button>
+            </div>
+            {% else %}
+
+
+            <div class="container col-md-4">
+                <form class="" action="{% url 'parser_manager' %}" method="post">
+                    {% csrf_token %}
+                    <div class=" mb-3 ">
+                        <label for="InputApiId " class="form-label ">api_id</label>
+                        <input name="api_id" type="text " class="form-control " id="InputApiId " value="{{api_id}}" required>
+                    </div>
+                    <div class="mb-3 ">
+                        <label for="InputApiHash " class="form-label ">api_hash</label>
+                        <input name="api_hash" class="form-control form-control-lg " type="text " id="InputApiHash " value="{{api_hash}}" required>
+                    </div>
+                    <div class="mb-3 ">
+                        <label for="InputSession " class="form-label ">Session</label>
+                        <input name="session" class="form-control form-control-lg " type="text " id="InputSession " value="{{session_name}}" required>
+                    </div>
+                    <div class="mb-3 ">
+                        <label for="InputPhone " class="form-label ">Phone</label>
+                        <input name="phone" type="text " class="form-control item " id="InputPhone " value="{{phone}}" required>
+                        <div class="invisible"><input name="create_flag" value="True"></div>
+                    </div>
+
+
+                    <button type="submit " class="btn btn-primary">Далее</button>
+                </form>
+
+            </div>
+            {% endif %}
+        </div>
+    </article>
+
+
+</div>
+
+<!-- Modal code request -->
+<div id="RequestCodeModal" class="modal fade" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content rounded-5 shadow">
+            <div class="modal-header p-5 pb-4 border-bottom-0">
+                <h2 class="fw-bold mb-0">Введите проверочный код</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body p-5 pt-0">
+                <form class="" action="{% url 'parser_manager' %}" method="post">
+                    {% csrf_token %}
+                    <div class="form-floating mb-3">
+                        <input name="code" type="text" class="form-control rounded-4" id="floatingCode" placeholder="Code" value="">
+                        <label for="floatingCode">Код</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input name="password" type="password" class="form-control rounded-4" id="floatingPass" placeholder="Password" value="">
+                        <label for="floatingPass">Пароль</label>
+                    </div>
+                         {% if parser_id %}
+                        <div class="invisible"><input name="parser_id" value="{{parser_id}}"></div>
+                        {% endif %}
+                    
+                    <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">Подтвердить</button>
+                    <small class="text-muted"></small>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %} {% block js %} {% endblock %}

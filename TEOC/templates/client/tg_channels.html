@@ -1,0 +1,86 @@
+{% extends 'base.html' %} {% load static %} {% block content %} {% csrf_token %}
+<script>
+    $(document).ready(function() {
+
+        $("#addrow").on("click", function() {
+            var newRow = $("<tr>");
+            var cols = "";
+            cols += '<td><div class="input-group mb-3"><span class="input-group-text" id="basic-addon3">https://t.me/</span><input type="text" class="form-control url" name="url" value=""/></div></td>';
+
+            cols += '<td><input type="button" class="ibtnSave btn btn-md btn-primary "  value="Save"></td>';
+
+            cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger "  value="Delete"></td>';
+            newRow.append(cols);
+            $("table").append(newRow);
+
+        });
+
+
+        $("table").on("click", ".ibtnDel", function(event) {
+            url = $(this).closest("tr").find(".form-control").val();
+            if (url) {
+                $.post('', {
+                    url: url,
+                    action: "del"
+                });
+            }
+            $(this).closest("tr").remove();
+        });
+
+        $("table").on("click", ".ibtnSave", function(event) {
+            url = $(this).closest("tr").find(".form-control").val();
+            $.post('', {
+                url: url,
+                action: "save"
+            });
+            $(this).closest("ibtnSave").remove();
+
+
+
+        });
+
+
+    });
+</script>
+
+<div class="container-lg">
+    <div class="table-responsive">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <h2 class="pb-2 border-bottom">Telegram channels</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="container col-md-8">
+                <div class="col-sm-4">
+                    <button type="button" class="btn btn-info add-new" id="addrow"><i class="fa fa-plus"></i> Add New</button>
+                </div>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>url</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        {% for p in object_list %}
+                        <tr>
+                            <td>
+                                <div class="input-group mb-3"><span class="input-group-text" id="basic-addon3">https://t.me/</span><input type="text" class="form-control url" name="url" value={{p.url}} /></div>
+                            </td>
+                            <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

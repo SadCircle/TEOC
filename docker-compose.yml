@@ -1,0 +1,65 @@
+version: "3.9"
+   
+services:
+  web:
+    build: 
+      context: .
+      dockerfile: ./compose/local/django/Dockerfile
+    image: teoc_web
+    command: /start
+    volumes:
+      - ./TEOC:/usr/src/TEOC
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./.env.dev
+    depends_on:
+      - db
+  db:
+    image: postgres
+    restart: always
+    volumes:
+      - ./TEOC/data/db:/var/lib/postgresql/data
+      - ./compose/local/django/db/init-user-db.sql:/docker-entrypoint-initdb.d/init-user-db.sql
+      
+    env_file:
+      - ./.env.dev
+  pgadmin:
+    container_name: pgadmin4
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "5050:80"
+  redis:
+    image: redis:alpine
+  celery:
+    build: 
+      context: .
+      dockerfile: ./compose/local/django/Dockerfile
+    image: teoc_celery_worker
+    command: /start-celeryworker
+    volumes:
+      - ./TEOC:/usr/src/TEOC
+    env_file:
+      - ./.env.dev
+    depends_on:
+      - redis
+      - db
+  celery-beat:
+    build: 
+      context: .
+      dockerfile: ./compose/local/django/Dockerfile
+    image: teoc_celery_beat
+    command: /start-celerybeat
+    volumes:
+      - ./TEOC:/usr/src/TEOC
+    env_file:
+      - ./.env.dev
+    depends_on:
+      - redis
+      - db
+  
+ 

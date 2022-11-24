@@ -1,0 +1,126 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+
+
+
+
+<div class="container px-4 py-5" id="hanging-icons">
+    <h2 class="pb-2 border-bottom">Возможности ElectroLib</h2>
+    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3 border-bottom">
+        <div class="col d-flex align-items-start">
+            <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+                <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"></use></svg>
+            </div>
+            <div>
+                <h2>Библиотека</h2>
+                <p>Огромная база книг, собранных из открытых источников</p>
+                <a href="{% url 'catalog' %}" class="btn btn-primary">
+            Перейти в каталог
+          </a>
+            </div>
+        </div>
+        <div class="col d-flex align-items-start">
+            <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+                <svg class="bi" width="1em" height="1em"><use xlink:href="#cpu-fill"></use></svg>
+            </div>
+            <div>
+                <h2>Новый паук</h2>
+                <p>Самостоятельное подключение пауков для сбора интересующих вас книг</p>
+                <a href="{% url 'parser_manager' %}" class="btn btn-primary">
+            Настроить сбор
+          </a>
+            </div>
+        </div>
+        <div class="col d-flex align-items-start">
+            <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+                <svg class="bi" width="1em" height="1em"><use xlink:href="#tools"></use></svg>
+            </div>
+            <div>
+                <h2>Менеджер пауков</h2>
+                <p>Мониторинг и конфигурирование существующих сборщиков</p>
+                <a href="{% url 'parsers' %}" class="btn btn-primary">
+            Открыть менеджер
+          </a>
+            </div>
+        </div>
+    </div>
+    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3 border-bottom">
+        <div class="col d-flex align-items-start">
+            <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+                <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"></use></svg>
+            </div>
+            <div>
+                <h2>Оффлайн подкачка</h2>
+                <p>Загрузка книг из локального хранилища</p>
+                <a href="{% url 'upload_files' %}" class="btn btn-primary">
+            Загрузить книги
+          </a>
+            </div>
+        </div>
+        <div class="col d-flex align-items-start">
+            <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+                <svg class="bi" width="1em" height="1em"><use xlink:href="#cpu-fill"></use></svg>
+            </div>
+            <div>
+                <h2>Источники</h2>
+                <p>Добавление телеграмм каналов с книгами</p>
+                <a href="{% url 'tg_channels' %}" class="btn btn-primary">
+            Добавить источники
+          </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container px-4 py-5" id="hanging-icons">
+    <div id="PreviewCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#PreviewCarousel" data-bs-slide-to="0" class="active" aria-label="Slide 1" aria-current="true"></button>
+            <button type="button" data-bs-target="#PreviewCarousel" data-bs-slide-to="1" aria-label="Slide 2" class=""></button>
+            <button type="button" data-bs-target="#PreviewCarousel" data-bs-slide-to="2" aria-label="Slide 3" class=""></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#999"></rect></svg>
+
+                <div class="container">
+                    <div class="carousel-caption text-start">
+                        <h1>Есть что почитать</h1>
+                        <p>Представляем вам умную систему предложений ElectoLib, основанная на ваших предпочтениях</p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#999"></rect></svg>
+
+                <div class="container">
+                    <div class="carousel-caption">
+                        <h1>Найдем все</h1>
+                        <p>Поиск ElectoLib позволяет найти подходящую вам книгу при помощи системы хештегов</p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#999"></rect></svg>
+
+                <div class="container">
+                    <div class="carousel-caption text-end">
+                        <h1>Ваше мнение для нас важно</h1>
+                        <p>Оставляйте ваши отзывы по прочитанным книгам и продвигайте их при помощи системы оценок</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#PreviewCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#PreviewCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+    </div>
+</div>
+
+
+
+{% endblock %}

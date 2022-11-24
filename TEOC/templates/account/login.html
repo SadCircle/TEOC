@@ -1,0 +1,25 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="container col-md-4">
+    <form class="" action="{% url 'login' %}" method="post">
+        {% csrf_token %} {% if failed %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            Имя пользователя или пароль неверны
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endif %}
+        <div class="form-floating mb-3">
+            <input name="username" type="username" class="form-control rounded-4" id="floatingInput" placeholder="Username">
+            <label for="floatingInput">Username</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input name="password" type="password" class="form-control rounded-4" id="floatingPassword" placeholder="Password">
+            <label for="floatingPassword">Password</label>
+        </div>
+        <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">Login</button>
+        <small class="text-muted"></small>
+
+    </form>
+</div>
+
+{% endblock %}
